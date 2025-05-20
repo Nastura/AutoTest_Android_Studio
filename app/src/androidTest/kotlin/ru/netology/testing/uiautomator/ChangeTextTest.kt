@@ -25,6 +25,8 @@ class ChangeTextTest {
     private lateinit var device: UiDevice
     private val textToSet = "Netology"
     private val MytextToSet = " "
+    private val MytextToSet2 = "Задание 2"
+
 
 
 //    @Test
@@ -150,7 +152,7 @@ class ChangeTextTest {
 
 
 // >>>>>>>>>>>>>>>>   МОИ ТЕСТЫ
-@Test
+@Test  // Второй тест
     fun myTestNullStringTitle1Test() {
         // Press home
         device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -160,7 +162,6 @@ class ChangeTextTest {
         device.wait(Until.hasObject(By.pkg(launcherPackage)), TIMEOUT)
 
         val context = ApplicationProvider.getApplicationContext<Context>()
-//        val packageName = context.packageName
         val intent = context.packageManager.getLaunchIntentForPackage(MODEL_PACKAGE)
         context.startActivity(intent)
 
@@ -173,8 +174,22 @@ class ChangeTextTest {
     }
 
 
-    @Test
-    fun myTestnewActiviti2Test() {
+    @Test // Первый тест
+    fun myTestnewActiviti1Test() {
+
+        device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        device.pressHome()
+        val launcherPackage = device.launcherPackageName
+        device.wait(Until.hasObject(By.pkg(launcherPackage)), TIMEOUT)
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val intent = context.packageManager.getLaunchIntentForPackage(MODEL_PACKAGE)
+        context.startActivity(intent)
+
+        device.wait(Until.hasObject(By.pkg(MODEL_PACKAGE)), TIMEOUT)
+        device.findObject(By.res(MODEL_PACKAGE, "userInput")).text = MytextToSet2
+        device.findObject(By.res(MODEL_PACKAGE, "buttonChange")).click()
+        val result = device.findObject(By.res(MODEL_PACKAGE, "textToBeChanged")).text
+        assertEquals(result, MytextToSet2)
 
     }
 

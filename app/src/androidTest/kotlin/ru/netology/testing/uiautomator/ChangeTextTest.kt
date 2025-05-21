@@ -26,6 +26,7 @@ class ChangeTextTest {
     private val textToSet = "Netology"
     private val MytextToSet = " "
     private val MytextToSet2 = "Задание 2"
+    private val valueText = "Hello UIAutomator"
 
 
 
@@ -185,6 +186,7 @@ class ChangeTextTest {
         val intent = context.packageManager.getLaunchIntentForPackage(MODEL_PACKAGE)
         context.startActivity(intent)
 
+
         device.wait(Until.hasObject(By.pkg(MODEL_PACKAGE)), TIMEOUT)
         device.findObject(By.res(MODEL_PACKAGE, "userInput")).text = MytextToSet2
         device.findObject(By.res(MODEL_PACKAGE, "buttonChange")).click()
@@ -192,6 +194,28 @@ class ChangeTextTest {
         assertEquals(result, MytextToSet2)
 
     }
+
+    @Test // Первый тест
+    fun myTestnewActiviti1Tes5t() {
+        device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+        device.pressHome()
+        val launcherPackage = device.launcherPackageName
+        device.wait(Until.hasObject(By.pkg(launcherPackage)), TIMEOUT)
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val intent = context.packageManager.getLaunchIntentForPackage(MODEL_PACKAGE)
+        context.startActivity(intent)
+
+        val packageName = MODEL_PACKAGE
+        waitForPackage(packageName)
+        device.findObject(By.res(MODEL_PACKAGE, "userInput")).text = MytextToSet
+        device.findObject(By.res(MODEL_PACKAGE, "buttonChange")).click()
+        
+        val result = device.findObject(By.res(packageName, "textToBeChanged")).text
+        assertEquals(result, valueText)
+
+//
+    }
+
 
 }
 

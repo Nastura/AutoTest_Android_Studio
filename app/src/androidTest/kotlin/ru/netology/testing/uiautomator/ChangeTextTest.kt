@@ -209,11 +209,37 @@ class ChangeTextTest {
         waitForPackage(packageName)
         device.findObject(By.res(MODEL_PACKAGE, "userInput")).text = MytextToSet
         device.findObject(By.res(MODEL_PACKAGE, "buttonChange")).click()
-        
+
         val result = device.findObject(By.res(packageName, "textToBeChanged")).text
         assertEquals(result, valueText)
 
 //
+    }
+
+    @Test
+    fun comparisonOfActivitiesInNewWindow() {
+        val packageName = MODEL_PACKAGE
+        waitForPackage(packageName)
+
+        device.findObject(By.res(packageName, "userInput")).text = textToSet
+        device.findObject(By.res(packageName, "buttonActivity")).click()
+        device.wait(Until.hasObject(By.text(textToSet)), TIMEOUT)
+
+        val result = device.findObject(By.res(packageName, "text")).text
+        assertEquals(result, textToSet)
+
+    }
+
+    @Test
+    fun testChangeText() {
+        val packageName = MODEL_PACKAGE
+        waitForPackage(packageName)
+
+        device.findObject(By.res(packageName, "userInput")).text = textToSet
+        device.findObject(By.res(packageName, "buttonChange")).click()
+
+        val result = device.findObject(By.res(packageName, "textToBeChanged")).text
+        assertEquals(result, textToSet)
     }
 
 

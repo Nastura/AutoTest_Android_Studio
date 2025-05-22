@@ -26,7 +26,7 @@ class ChangeTextTest {
     private val textToSet = "Netology"
     private val MytextToSet = " "
     private val MytextToSet2 = "Задание 2"
-    private val valueText = "Hello UiAutomator"
+    private val valueText = "Hello UiAutomator!"
 
 
 
